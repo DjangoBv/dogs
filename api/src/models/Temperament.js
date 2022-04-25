@@ -6,13 +6,14 @@ module.exports = (sequelize) => {
   sequelize.define("temperament", {
     id: {
       type: DataTypes.UUID,
-      allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+      defaultValue: DataTypes.UUIDV4
     },
     name: {
-      type: DataTypes.TEXT,
-      allowNull: false,
+      type: DataTypes.STRING,
     },
+  },
+  {
+    timestamps: false,
   });
 };
