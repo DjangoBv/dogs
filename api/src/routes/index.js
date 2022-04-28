@@ -21,11 +21,13 @@ const getApiInfo = async () => {
     const breed = {
       id: el.id,
       name: el.name,
-      weight: el.weight.metric,
-      height: el.height.metric,
+      weight_men: el.weight.metric.split(' - ')[0],
+      weight_may: el.weight.metric.split(' - ')[1],
+      height_men: el.height.metric.split(' - ')[0],
+      height_may: el.height.metric.split(' - ')[1] ? el.height.metric.split(' - ')[1] : el.height.metric.split(' - ')[0],
       life_span: el.life_span,
       image: el.image.url,
-      temperament: el.temperament
+      temperaments: el.temperament
     };
     return breed;
   });
@@ -48,14 +50,16 @@ const getDbInfo = async () => {
   });
 
   infoDb = infoDb.map(
-    ({ id, name, weight, height, life_span, image, temperaments }) => ({
+    ({ id, name, weight_men, weight_may, height_men, height_may, life_span, image, temperaments }) => ({
       id,
       name,
-      weight,
-      height,
+      weight_men,
+      weight_may,
+      height_men,
+      height_may,
       life_span,
       image,
-      temperaments: temperaments.map((el) => el.name),
+      temperaments: temperaments.map((el) => (el.name)),
     })
     // console.log(infoDb)
   );
@@ -158,12 +162,14 @@ router.post("/dogs", async (req, res) => {
   // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de raza de perro por body
   // Crea una raza de perro en la base de datos
   try {
-    const { name, weight, height, life_span, createdDb, image, temperaments } =
+    const { name, weight_men, weight_may, height_men, height_may, life_span, createdDb, image, temperaments } =
       req.body;
     const createdBreed = await Breed.create({
       name,
-      weight,
-      height,
+      weight_men,
+      weight_may,
+      height_men,
+      height_may,
       life_span,
       createdDb,
       image,

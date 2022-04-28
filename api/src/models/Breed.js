@@ -14,13 +14,21 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    weight: {
+    weight_men: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    height: {
+    weight_may: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    height_men: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    height_may: {
+      type: DataTypes.STRING,
+      allowNull: false, //puede ser true porque solo tiene un parametro
     },
     life_span: {
       type: DataTypes.STRING,
